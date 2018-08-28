@@ -1,0 +1,133 @@
+= MindConnect IoT Extension
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:imagesDir: /images/
+:toclevels: 1
+:sectlinks:
+
+[introduction]
+= Introduction
+
+[.lead]
+On the Launchpad, navigate to MindConnect IoT Extension by clicking on its tile. In case you do not see the “MindConnect IoT Extension” tile on your Launchpad,
+please check the assigned roles of your user (see chapter MindSphere Launchpad Integration).
+
+image::mindsphere-launch-pad.png[mindsphere-launch-pad,align=center]
+
+:numbered:
+
+= Getting Started
+
+== Login
+
+Login with the credentials you have got after activating MindConnect IoT Extension (see chapter Activate MindConnect IoT Extension and MindConnect Integration).
+
+== Assign required roles
+
+For the beginning, we will use built-in Device Simulator. Therefore, you need role Devicemanagement User.
+Go to the User Management area (Administration > User).
+
+image::2-device-mgmt.png[Device mgmt,align=center]
+
+Add role Devicemanagement User to your user account and hit “Apply”.
+
+image::3-admin.png[Admin,align=center]
+
+== Create technical communication user
+
+For the integration with MindSphere, MindConnect IoT Extension uses MindConnect Integration in the background.
+Therefore, a technical communication user is necessary used by MindConnect Integration to connect to the MindConnect IoT Extension subsystem.
+
+In the User Management area (Administration > User) click on “Add User” and enter the following data:
+
+- User name: MC-Integration-Comm
+- E-Mail: <enter a valid e-mail address>
+- Firstname: MC Integration
+- Lastname: Communicaton-User
+- Global Roles: admin
+- Disable Login option to send password reset via e-mail
+- Enter password and password confirmation
+
+The result should be similar to this screenshot:
+
+image::4-mc-integration-comm.png[M.C-integration-comm,align=center]
+
+== Create Device Simulator
+
+We will use a device simulator that mimics a real-world device. Go to Device Management > Simulators and click on “New simulator”.
+In the “Add simulator” dialog, choose “Temperature measurements” as preset, enter a name for the new simulator, e.g. PumpSimulator, and hit “Continue”.
+
+image::5-add-simulator.png[5-add-simulator,align=center]
+
+The new simulator is created and in a paused state.
+Activate the simulator by clicking on the toggle button. It switches to the run state.
+
+image::6-simulators.png[6-simulators,align=center]
+
+Now, go to “All Devices” to get the Device ID (in our case 10636). We will need this in a later step.
+
+image::7-all-devices.png[7-all-devices,align=center]
+
+== Asset Mapping
+
+We must define a mapping, in order to correlate the device simulators and their measurements to MindSphere Assets and their Aspects. This can be done manually by “Asset Mapping” provided in the Device Management Application.  Go to the Device Management > Asset Mapping.
+The main view is separated into two panels: Navigation (containing Devices and Assets) and DataMaps.
+On the navigation panel, we can find a tree component on the left side which shows all available device groups and devices (Simulators). On the right side all available assets of the related MindSphere tenant are shown.Below a table shows the current mappings.
+
+image::8-asset-mapping.jpg[8-asset-mapping,align=center]
+
+*The creation of a mapping consists of four steps*:
+
+1. Select a device on the left side of Navigation Panel. (We can see all mappings of selected device below in the Data Map table)
+2.	Select an asset on the right side of Navigation Panel.
+3.	Click “+ Add Mapping”. (We can only add a new mapping when we select a device and an asset on the lowest level)
+4.	Select “Source” and “Target” in a separate dialog.
+
+In case of many devices and assets, the search text fields for each section can help finding devices or assets on navigation panel.
+
+- The search auto apply once we hit the "Return" (Enter) key.
+- Also if we delete the existing search string and hits "Return", all devices and assets are shown again.(If filter type is "SHOW ALL", this will show the "group view")
+- If we entered at least 3 characters the search will be applied immediately without hitting the "Return" key.
+
+Clearing the selection on the navigation panel can be done by button “Clear Selection”.
+
+image::9-asset-mapping-2.png[9-asset-mapping-2,align=center]
+
+After clicking “+ Add Mapping”, a dialog appears to select the mapping information of selected device and asset.
+
+image::10-add-mapping.png[10-add-mapping,align=center]
+
+Now, we select the required “Source” and “Target” information in the “Add Mapping” dialog:
+
+- Measurement: Source measurement of IoT Extension
+- Series: Source series of IoT Extension
+- Aspect: Target aspect of MindSphere
+- Variable: Target variable of MindSphere
+
+Clicking on “+ Add” creates a mapping between souce and target. We can add more mappings by repeating the above mentioned steps.
+At this state the mapping is not committed yet. Mappings must be committed (published) by clicking on “Commit Changes” and applying those changes in the confirmation dialog box.This action activates all mappings immediately.
+
+image::11-added-mapping.png[11-added-mapping,align=center]
+
+image::12-commit-mapping.png[12-commit-mapping,align=center]
+
+image::13-maps-data.png[13-maps-data,align=center]
+
+- We can navigate the mappings by clicking on the page numbers.
+- Mappings can be sorted based on the Measurement, Series, Aspect Name, Variable and Status.
+- Mappings can be edited or deleted by clicking on the “pencile” or “recycle bin” icon.
+
+
+IMPORTANT: Any changes in UI, should be added here.
+
+
+[appendix]
+= Frequently Asked Questions
+
+[NOTE]
+====
+.Any questions or remarks?
+Please do not hesitate to contact us.
+====
